@@ -13,7 +13,7 @@ server.use(cors(corsOptions));
 server.use(middlewares);
 server.use(router);
 
-const port = 8080;
+const port = process.env.PORT || 9000;
 server.listen(port, () => {
   console.log(`JSON Server is running on ${port}`);
 });
