@@ -3,8 +3,6 @@ const cors = require("cors");
 
 const db = require("./db.json");
 
-console.log(db);
-
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
@@ -15,13 +13,13 @@ var corsOptions = {
 
 server.get("/product-list/:pageNo", (req, res) => {
   const { pageNo } = req.params;
-  if (!pageNo) res.status(200).send("BAD REQUEST: NEED PAGE NUMBER PARAMETER");
-
   const { products } = db;
+
   const productsPerPage = 8;
   const startIndex = (pageNo - 1) * productsPerPage;
   const endIndex = pageNo * productsPerPage;
   const pageResult = products.slice(startIndex, endIndex);
+
   res.json({
     pageResult,
     lastPage: Math.ceil(products.length / productsPerPage),
